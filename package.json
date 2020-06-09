@@ -1,0 +1,24 @@
+{
+  "name": "thankgodfor",
+  "version": "1.0.0",
+  "description": "# Link to wireframe  https://www.figma.com/file/1Rogu6PpnPiEBeWI4pd71P/Thank-God-4-Raw-%26-Vegan-Treats?node-id=0%3A1",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Robby8892/ThankGodFor.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Robby8892/ThankGodFor/issues"
+  },
+  "homepage": "https://github.com/Robby8892/ThankGodFor#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mongoose": "^5.9.18"
+  }
+}
