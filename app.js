@@ -4,8 +4,6 @@ const express = require('express')
 const app = express()
 const session = require('express-session')
 
-port = process.env.PORT
-
 
 app.use(session({
 	secret: process.env.SESSION_SECRET,
@@ -19,15 +17,16 @@ app.use(session({
 // and session will be destoryed anytime the cart is cleared 
 // either from the user clearing the cart, or the user making their checkout 
 
-app.use((req, res, next) => {
 
+
+// test route 
+
+
+app.get('/', (req,res)=>{
+
+	res.send('Test route works')
 })
-
-
-
-
-
-
+console.log(app.get);
 
 // routes for API
 
@@ -48,27 +47,8 @@ app.use('/api/v1', cartRouter)
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-app.listen(port, () => {
-	console.log(`Server running on port ${port}`);
+app.listen(process.env.PORT
+, () => {
+	console.log(`${new Date} Server running on port ${process.env.PORT
+}`);
 })
