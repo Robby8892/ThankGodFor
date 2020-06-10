@@ -1,5 +1,5 @@
 require('dotenv').config()
-
+require('./db/db.js')
 const express = require('express')
 const app = express()
 const session = require('express-session')
@@ -31,13 +31,15 @@ app.use((req, res, next) => {
 
 // routes for API
 
+
+
 const cartRouter = require('./routes/cart-router.js')
 
 
 
 // API Routes being used
 
-api.use('/api/v1', cartRouter)
+app.use('/api/v1', cartRouter)
 
 
 

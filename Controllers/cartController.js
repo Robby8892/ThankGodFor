@@ -1,10 +1,13 @@
 const Cart = require('../models/cart.js')
+const session = require('express-session')
 
 // when a user makes a request to the home page 
 // their cart info will be created and stored in session 
-createCart = async (req,res,next) => {
-	try {
 
+
+
+createCart = async(req, res, error) => {
+	try{
 		const createdCart = await Cart.create()
 
 		res.status(201).json({
@@ -14,13 +17,14 @@ createCart = async (req,res,next) => {
 			status:201
 		})
 
-	}catch(){
-		next()
-	}
 
-	})
+	}catch(error){
+		console.log(error);
+	}
+}
+
 
 
 module.exports = {
-	createdCart
+	createCart
 }
