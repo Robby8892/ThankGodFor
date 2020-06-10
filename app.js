@@ -26,7 +26,6 @@ app.get('/', (req,res)=>{
 
 	res.send('Test route works')
 })
-console.log(app.get);
 
 // routes for API
 

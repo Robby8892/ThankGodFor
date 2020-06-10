@@ -1,9 +1,11 @@
 const mongoose = require('mongoose')
 
-mongoose.connect('mongodb://localhost:27017/thankGodForVeganTreatsApp', {
+mongoose.connect(process.env.MONGODB_URI, {
 	useNewUrlParser: true,
 	useUnifiedTopology: true
 })
+
+console.log(process.env.MONGODB_URI, 'here is my db');
 
 mongoose.connection.on('connected', () => {
 	console.log('You\'re connected to the db');

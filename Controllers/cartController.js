@@ -8,14 +8,24 @@ const session = require('express-session')
 
 createCart = async(req, res, error) => {
 	try{
-		
-		const createdCart = await Cart.create()
+
+		const newCart = {
+			checkout: false,
+			clearCart: false
+		}
+
+		const createdCart = await Cart.create(newCart)
+
+		// when a new cart is made then I want to set the session 
+		// id to the id of the that new cart 
+		// when a checkout is made to false, or clearcart is made
+		// to false then I want to delete the contents of the cart 
 
 		res.status(201).json({
 			data:createdCart,
 			success: true,
 			message: 'A new cart has been made',
-			status:201
+			status:201,
 		})
 
 
