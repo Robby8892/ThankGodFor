@@ -20,7 +20,7 @@ app.use(session({
 // either from the user clearing the cart, or the user making their checkout 
 
 app.use((req, res, next) => {
-	
+
 })
 
 
@@ -29,13 +29,15 @@ app.use((req, res, next) => {
 
 
 
+// routes for API
+
+const cartRouter = require('./routes/cart-router.js')
 
 
 
+// API Routes being used
 
-
-
-
+api.use('/api/v1', cartRouter)
 
 
 

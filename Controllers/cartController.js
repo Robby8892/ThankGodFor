@@ -19,3 +19,8 @@ createCart = async (req,res,next) => {
 	}
 
 	})
+
+
+module.exports = {
+	createdCart
+}
