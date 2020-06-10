@@ -8,6 +8,7 @@ const session = require('express-session')
 
 createCart = async(req, res, error) => {
 	try{
+		
 		const createdCart = await Cart.create()
 
 		res.status(201).json({
