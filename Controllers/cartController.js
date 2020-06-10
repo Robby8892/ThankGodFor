@@ -1,23 +1,21 @@
-const mongoose = require('mongoose')
-const Cart = require('./cart')
+const Cart = require('../models/cart.js')
 
-const cartSchema = mongoose.Schema({
-	id: {
-		type: String,
-		required: true
-	},
+// when a user makes a request to the home page 
+// their cart info will be created and stored in session 
+createCart = async (req,res,next) => {
+	try {
 
-	checkout: {
-		type: Boolean,
-		default: false
-	},
+		const createdCart = await Cart.create()
 
-	clearCart: {
-		type: Boolean,
-		default: false
+		res.status(201).json({
+			data:createdCart,
+			success: true,
+			message: 'A new cart has been made',
+			status:201
+		})
+
+	}catch(){
+		next()
 	}
-})
 
-const Cart = mongoose.model('Cart', cartSchema)
-
-module.exports = Cart
+	})
