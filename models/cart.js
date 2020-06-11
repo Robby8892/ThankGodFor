@@ -1,6 +1,10 @@
 const mongoose = require('mongoose')
 
 const Treat = require('./treat.js')
+// a cart is always created when a user opens the site, 
+// and eventually I would want this to stay this way until either
+// the user destorys history or empties their cart
+// that way the page could always maintain the cart contents 
 
 const cartSchema = mongoose.Schema({
 	checkout: {
@@ -11,13 +15,10 @@ const cartSchema = mongoose.Schema({
 	clearCart: {
 		type: Boolean,
 		default: false
-	}
-	// i will need a model for contents that go into the cart that 
+	},
+	// i will need a model for treats that go into the cart that 
 	// are then referenced in here with a unique id 
-	contentsOfCart: {
-		type: mongoose.Schema.Types.ObjectId,
-		ref: 'Treat'
-	}
+	treatsInCart: [Treat.schema]
 })
 
 const Cart = mongoose.model('Cart', cartSchema)
