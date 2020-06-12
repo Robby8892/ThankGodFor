@@ -5,8 +5,8 @@ const app = express()
 const session = require('express-session')
 const fetch = require('node-fetch')
 
-const crypto = require('crypto')
-console.log(crypto);
+
+
 app.use(session({
 	secret: process.env.SESSION_SECRET,
 	resave: false, 
@@ -35,12 +35,12 @@ app.get('/', (req,res)=>{
 
 const cartRouter = require('./routes/cart-router.js')
 const treatRouter = require('./routes/treat-router.js')
-
+const adminRouter = require('./routes/admin-router.js')
 // API Routes being used
 
 app.use('/api/v1', cartRouter)
 app.use('/api/v1', treatRouter)
-
+app.use('/api/v1', adminRouter)
 
 
 app.listen(process.env.PORT

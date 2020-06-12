@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const shortId = require('shortid')
 
 const adminSchema = mongoose.Schema({
 	loginName: {
@@ -11,7 +12,7 @@ const adminSchema = mongoose.Schema({
 	},
 	token: {
 		type: String,
-		required: true
+		default: shortId.generate()
 	}
 })
 
