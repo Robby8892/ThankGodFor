@@ -5,6 +5,8 @@ const app = express()
 const session = require('express-session')
 const fetch = require('node-fetch')
 
+const crypto = require('crypto')
+console.log(crypto);
 app.use(session({
 	secret: process.env.SESSION_SECRET,
 	resave: false, 
