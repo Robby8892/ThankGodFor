@@ -63,8 +63,6 @@ loginAdmin = async (req,res, error) => {
 			req.session.loginName = findAdmin.loginName
 			req.session.adminId = findAdmin.adminId
 
-			console.log(req.session.admin, 'here is admin');
-
 			return res.status(201).json({
 				status: 201,
 				loginName: findAdmin.loginName,
@@ -88,7 +86,32 @@ loginAdmin = async (req,res, error) => {
 
 	}
 
-	// logout route 
+logoutAdmin = async (req,res,error) => {
+	try {
+		if(!req.session.loginName){
+			return res.status(400).json({
+				status: 400,
+				success: false,
+				error: 'You need to be logged in to logout.'
+			})
+		} else {
+
+			await req.session.destroy()
+
+			return res.status(200).json({
+				data: {},
+				success: true,
+				status: 200,
+				message: 'You are succesfully logged out'
+			})
+		}
+
+
+	}catch(error){
+		console.log('error');
+	}
+
+	}
 
 
 
@@ -102,5 +125,6 @@ loginAdmin = async (req,res, error) => {
 
 module.exports = {
 	createAdmin,
-	loginAdmin
+	loginAdmin,
+	logoutAdmin
 }
