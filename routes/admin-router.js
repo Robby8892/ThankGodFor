@@ -6,5 +6,6 @@ const router = express.Router()
 
 
 router.post('/admin/new', adminController.createAdmin)
+router.post('/admin/login', adminController.loginAdmin)
 
 module.exports = router

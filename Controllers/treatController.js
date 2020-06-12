@@ -5,9 +5,9 @@ const Cart = require('../models/cart.js')
 
 const createTreat = async (req,res, error) => {
 	try {
-		// I am doing an api call to figma
-		// which has all the photos stored
-		// I will be updating all the trests with each photo in one full creation
+		
+		// only an admin can create, update, or delete treats from the site
+		
 
 
 	}catch(error){
