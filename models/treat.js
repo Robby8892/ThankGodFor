@@ -5,13 +5,18 @@ const Cart = require('./cart.js')
 const treatSchema = mongoose.Schema({
 	name: {
 		type: String,
-		required: true
+		default: ''
 	},
 
 	image: {
 		data: Buffer,
 		contentType: String,
 		default: ''
+	},
+
+	price: {
+		type: Number,
+		default: 0
 	},
 	// when in cart is true the treat will be added to the 
 	// carts contents 
