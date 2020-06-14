@@ -116,5 +116,6 @@ module.exports = {
 	createTreat,
 	deleteTreat,
 	updateTreat,
-	getOneTreat
+	getOneTreat,
+	getAllTreats
 }
