@@ -50,8 +50,6 @@ const deleteTreat = async (req,res,error) => {
 
 const updateTreat = async (req,res,error) => {
 	try {
-
-
 		const treatToUpdate = await Treat.findByIdAndUpdate(req.params.id, req.body)
 
 		if(!treatToUpdate){
@@ -73,6 +71,24 @@ const updateTreat = async (req,res,error) => {
 	}
 
 	}
+
+const getOneTreat = async (req,res,error) => {
+	try {
+		const foundTreat = await Treat.find({_id: req.params.id})
+	}catch(error){
+		console.log(error);
+	}
+
+}
+
+const getAllTreats = async (req,res,error) => {
+	try {
+
+	}catch(error){
+		console.log(error);
+	}
+
+}
 
 
 module.exports = {
