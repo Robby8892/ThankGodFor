@@ -11,5 +11,6 @@ const verifyIfAdmin = require('../lib/verifyIfAdmin.js')
 
 router.post('/treat/new', upload.single('imgOfTreat'), treatController.createTreat)
 router.delete('/treat/:id', treatController.deleteTreat)
+router.put('/treat/:id/edit', treatController.updateTreat)
 
 module.exports = router

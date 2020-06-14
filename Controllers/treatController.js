@@ -48,9 +48,11 @@ const deleteTreat = async (req,res,error) => {
 	}
 }
 
-const updateTreat async (req,res,error) => {
+const updateTreat = async (req,res,error) => {
 	try {
-		const treatToUpdate = await Treat.findByIdAndUpdate(req.param.id, req.body)
+
+
+		const treatToUpdate = await Treat.findByIdAndUpdate(req.params.id, req.body)
 
 		if(!treatToUpdate){
 			return res.status(400).json({
