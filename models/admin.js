@@ -13,6 +13,10 @@ const adminSchema = mongoose.Schema({
 	token: {
 		type: String,
 		default: shortId.generate()
+	},
+	email: {
+		type: String,
+		required: true
 	}
 })
 

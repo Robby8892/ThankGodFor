@@ -15,7 +15,8 @@ createAdmin = async (req,res,error) => {
 		const adminObj = {
 			loginName: 'MichelleScott',
 			password: hashedPassword,
-			token: hashedToken
+			token: hashedToken,
+			email: process.env.EMAIL
 		}
 
 		const newAdmin = new Admin(adminObj)
