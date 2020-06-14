@@ -26,9 +26,9 @@ const createTreat = async (req,res, error) => {
 
 const deleteTreat = async (req,res,error) => {
 	try {
-		const deleteTreat = await Treat.findByIdAndRemove(req.params.id)
+		const treatToDelete = await Treat.findByIdAndRemove(req.params.id)
 
-		if(!deleteTreat){
+		if(!treatToDelete){
 			return res.status(400).json({
 				data: {},
 				success: false,
@@ -39,17 +39,17 @@ const deleteTreat = async (req,res,error) => {
 			res.status(200).json({
 				data: {},
 				success: true,
-				message: 'You have delete the treat'
+				message: 'You have deleted the treat'
 			})
 		}
 
 	}catch(error){
 		console.log(error);
 	}
-
-	}
+}
 
 
 module.exports = {
-	createTreat
+	createTreat,
+	deleteTreat
 }
