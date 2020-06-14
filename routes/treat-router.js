@@ -7,6 +7,8 @@ const upload = multer({ storage: storage})
 
 const router = express.Router()
 
+router.get('/treat/:id', treatController.getOneTreat)
+
 const verifyIfAdmin = require('../lib/verifyIfAdmin.js')
 
 router.post('/treat/new', upload.single('imgOfTreat'), treatController.createTreat)

@@ -75,6 +75,20 @@ const updateTreat = async (req,res,error) => {
 const getOneTreat = async (req,res,error) => {
 	try {
 		const foundTreat = await Treat.find({_id: req.params.id})
+
+		if(!foundTreat){
+			return res.status(400).json({
+				data: {},
+				success: false,
+				error: 'No id matches the one provided.'
+			})
+		} else {
+			res.status(200).json({
+				data: foundTreat,
+				success: true,
+				message: 'Here is the treat by the id provided.'
+			})
+		}
 	}catch(error){
 		console.log(error);
 	}
@@ -94,5 +108,6 @@ const getAllTreats = async (req,res,error) => {
 module.exports = {
 	createTreat,
 	deleteTreat,
-	updateTreat
+	updateTreat,
+	getOneTreat
 }
