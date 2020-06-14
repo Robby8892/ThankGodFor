@@ -15,7 +15,7 @@ const createTreat = async (req,res, error) => {
 		res.status(201).json({
 			data: createdTreat,
 			success: true,
-			message: 'You have successfully created a new treat',
+			message: 'You have successfully created a new treat.',
 			status: 201
 		})
 
@@ -32,14 +32,14 @@ const deleteTreat = async (req,res,error) => {
 			return res.status(400).json({
 				data: {},
 				success: false,
-				error: 'No id matches the one provide to delete'
+				error: 'No id matches the one provide to delete.'
 			})
 		} else {
 
 			res.status(200).json({
 				data: {},
 				success: true,
-				message: 'You have deleted the treat'
+				message: 'You have deleted the treat.'
 			})
 		}
 
@@ -62,7 +62,7 @@ const updateTreat = async (req,res,error) => {
 			res.status(201).json({
 				data: treatToUpdate,
 				success: true,
-				message: 'You have successfully updated the treat'
+				message: 'You have successfully updated the treat.'
 			})
 		}
 
@@ -97,6 +97,13 @@ const getOneTreat = async (req,res,error) => {
 
 const getAllTreats = async (req,res,error) => {
 	try {
+		const foundTreat = await Treat.find()
+
+		res.status(200).json({
+			data: foundTreat,
+			success: true,
+			message: 'Here are all the treats in the database.'
+		})
 
 	}catch(error){
 		console.log(error);
