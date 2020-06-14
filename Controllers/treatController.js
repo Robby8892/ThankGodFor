@@ -4,7 +4,7 @@ const Cart = require('../models/cart.js')
 
 
 
-const createTreat = async (req,res, error) => {
+createTreat = async (req,res, error) => {
 	try {
 		
 		// only an admin can create, update, or delete treats from the site
@@ -24,7 +24,7 @@ const createTreat = async (req,res, error) => {
 	}
 }
 
-const deleteTreat = async (req,res,error) => {
+deleteTreat = async (req,res,error) => {
 	try {
 		const treatToDelete = await Treat.findByIdAndRemove(req.params.id)
 
@@ -48,7 +48,7 @@ const deleteTreat = async (req,res,error) => {
 	}
 }
 
-const updateTreat = async (req,res,error) => {
+updateTreat = async (req,res,error) => {
 	try {
 		const treatToUpdate = await Treat.findByIdAndUpdate(req.params.id, req.body)
 
@@ -72,7 +72,7 @@ const updateTreat = async (req,res,error) => {
 
 	}
 
-const getOneTreat = async (req,res,error) => {
+getOneTreat = async (req,res,error) => {
 	try {
 		const foundTreat = await Treat.find({_id: req.params.id})
 
@@ -95,7 +95,7 @@ const getOneTreat = async (req,res,error) => {
 
 }
 
-const getAllTreats = async (req,res,error) => {
+getAllTreats = async (req,res,error) => {
 	try {
 		const foundTreat = await Treat.find()
 

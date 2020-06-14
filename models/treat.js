@@ -8,8 +8,10 @@ const treatSchema = mongoose.Schema({
 		default: ''
 	},
 
-	img: {
-		type: String
+	imgOfTreat: {
+		data: Buffer,
+		contentType: String,
+		default: ''
 	},
 
 	price: {
