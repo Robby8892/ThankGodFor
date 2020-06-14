@@ -1,5 +1,6 @@
 const Cart = require('../models/cart.js')
 const session = require('express-session')
+const Treat = require('../models/treat.js')
 
 // when a user makes a request to the home page 
 // their cart info will be created and stored in session 
@@ -13,7 +14,7 @@ createCart = async(req, res, error) => {
 			checkout: false,
 			clearCart: false
 		}
-
+		console.log(newCart);
 		const createdCart = await Cart.create(newCart)
 
 		// when a new cart is made then I want to set the session 
