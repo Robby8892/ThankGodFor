@@ -48,8 +48,33 @@ const deleteTreat = async (req,res,error) => {
 	}
 }
 
+const updateTreat async (req,res,error) => {
+	try {
+		const treatToUpdate = await Treat.findByIdAndUpdate(req.param.id, req.body)
+
+		if(!treatToUpdate){
+			return res.status(400).json({
+				data: {},
+				success: false,
+				error: 'No id matches the one provided.'
+			})
+		} else {
+			res.status(201).json({
+				data: treatToUpdate,
+				success: true,
+				message: 'You have successfully updated the treat'
+			})
+		}
+
+	}catch(error){
+		console.log(error);
+	}
+
+	}
+
 
 module.exports = {
 	createTreat,
-	deleteTreat
+	deleteTreat,
+	updateTreat
 }
