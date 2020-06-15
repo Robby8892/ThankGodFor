@@ -62,7 +62,6 @@ loginAdmin = async (req,res, error) => {
 			req.session.loginName = findAdmin.loginName
 			req.session.adminId = findAdmin._id
 
-			console.log('here is session data', req.session);
 			return res.status(200).json({
 				status: 201,
 				loginName: req.session.loginName,
@@ -96,7 +95,7 @@ logoutAdmin = async (req,res,error) => {
 				error: 'You need to be logged in to logout.'
 			})
 		} else {
-			console.log('are we getting here for some reason?');
+
 			await req.session.destroy()
 
 			return res.status(200).json({
