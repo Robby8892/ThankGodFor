@@ -5,6 +5,8 @@ const app = express()
 const session = require('express-session')
 const fetch = require('node-fetch')
 const bodyParser = require('body-parser')
+const fileStore = require('session-file-store')(session)
+const fileStoreOptions = {}
 
 
 app.use(bodyParser.urlencoded({ 
@@ -17,9 +19,12 @@ app.use(session({
 	secret: process.env.SESSION_SECRET,
 	resave: false, 
 	saveUninitialized: true,
+	httpOnly: false,
+	store: new fileStore({
+		path: '.server/sessions'
+	}),
 	cookie: {
-		secure: true,
-		maxAge: 6 * 60 * 1000 * 300
+		maxAge: 6 * 60 * 1000 * 30
 	}
 }))
 
@@ -45,24 +50,23 @@ const cartRouter = require('./routes/cart-router.js')
 const treatRouter = require('./routes/treat-router.js')
 const adminRouter = require('./routes/admin-router.js')
 
-
 // here I will setup res.locals 
 
 app.use((req, res, next) => {
+	console.log(req.session);
 	if(req.session.admin){
 		res.locals.adminId = req.session.adminId
 		res.locals.loginName = req.session.loginName
-	} 
-	if(req.session.cart){
+		
+	} if(req.session.cart){
 		res.locals.cartId = req.session.cartId
 	} else {
 		res.locals.adminId = false
 		res.locals.loginName = false
 		res.locals.cartId = false
 	}
+	next()
 })
-
-
 
 
 

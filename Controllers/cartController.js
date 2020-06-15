@@ -20,6 +20,8 @@ createCart = async(req, res, error) => {
 		// to false then I want to delete the contents of the cart 
 		req.session.cartId = createdCart._id
 		req.session.cart = true 
+
+		console.log(res.locals);
 		req.session.save()
 		
 		res.status(200).json({
@@ -38,18 +40,18 @@ createCart = async(req, res, error) => {
 updateCart = async (req,res,error) => {
 	try {
 
-		console.log(req.session);
-		// const updatedCart = await Cart.findById(req.session.cartId)
-		// updatedCart.treatsInCart.push(req.params.treatId)
 		
-		// await updatedCart.save()
+		const updatedCart = await Cart.findById(res.locals.cartId)
+		updatedCart.treatsInCart.push(req.params.treatId)
+		
+		await updatedCart.save()
 
-		// console.log(updatedCart);
-		// res.status(200).json({
-		// 	data: updatedCart, 
-		// 	success: true,
-		// 	messsage: 'You haved added a new item to your cart.'
-		// })	
+		console.log(updatedCart);
+		res.status(200).json({
+			data: updatedCart, 
+			success: true,
+			messsage: 'You haved added a new item to your cart.'
+		})	
 
 	}catch(error){
 		console.log(error);

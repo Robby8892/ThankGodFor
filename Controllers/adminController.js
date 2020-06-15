@@ -58,14 +58,12 @@ loginAdmin = async (req,res, error) => {
 
 		if(passwordValidation){
 			console.log('passward is valid!');
-			
-			
 			req.session.admin = true
 			req.session.loginName = findAdmin.loginName
 			req.session.adminId = findAdmin._id
 
-			req.session.save()
-			return res.status(201).json({
+			console.log('here is session data', req.session);
+			return res.status(200).json({
 				status: 201,
 				loginName: req.session.loginName,
 				id: req.session.adminId,
@@ -88,6 +86,7 @@ loginAdmin = async (req,res, error) => {
 
 	}
 
+
 logoutAdmin = async (req,res,error) => {
 	try {
 		if(!req.session.loginName){
@@ -97,7 +96,7 @@ logoutAdmin = async (req,res,error) => {
 				error: 'You need to be logged in to logout.'
 			})
 		} else {
-
+			console.log('are we getting here for some reason?');
 			await req.session.destroy()
 
 			return res.status(200).json({
