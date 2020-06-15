@@ -87,11 +87,29 @@ deleteItemFromCart = async (req,res,error) => {
 		usersCart.treatsInCart.id(req.params.treatId).remove()
 
 		await usersCart.save()
-		console.log('here is the updated cart', usersCart);
 		res.status(200).json({
 			data: usersCart,
 			success: true,
 			messsage: 'Here is the updated cart after removing the treat.'
+		})
+
+	}catch(error){
+		console.log(error);
+	}
+
+}
+
+deleteAllItemsFromCart = async (req,res,error) => {
+	try {
+		const usersCart = await Cart.findById(res.locals.cartId)
+		usersCart.clearcart = true 
+		usersCart.treatsInCart.remove()
+		await usersCart.save()
+
+		res.status(200).json({
+			data: usersCart,
+			success: true,
+			messsage: 'All items from the cart have been deleted.'
 		})
 
 	}catch(error){
@@ -106,5 +124,6 @@ module.exports = {
 	createCart,
 	updateCart,
 	getCart,
-	deleteItemFromCart
+	deleteItemFromCart,
+	deleteAllItemsFromCart
 }
