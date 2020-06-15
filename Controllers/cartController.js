@@ -44,6 +44,7 @@ updateCart = async (req,res,error) => {
 		const updatedCart = await Cart.findById(res.locals.cartId)
 		const foundTreat = await Treat.findById(req.params.treatId)
 		foundTreat.cartId = res.locals.cartId
+		foundTreat.inCart = true 
 		updatedCart.treatsInCart.push(foundTreat)
 
 
@@ -64,7 +65,7 @@ updateCart = async (req,res,error) => {
 
 getCart = async (req,res,error) => {
 	try {
-		const getUserCart = await Cart.findById(res.locals.cartId).populate('treatsInCart')
+		const getUserCart = await Cart.findById(res.locals.cartId)
 		console.log(getUserCart);
 		res.status(200).json({
 			data: getUserCart,
@@ -85,6 +86,15 @@ getCart = async (req,res,error) => {
 deleteItemFromCart = async (req,res,error) => {
 	try {
 		const usersCart = await Cart.findById(res.locals.cartId)
+
+		await Cart.findByIdAndUpdate(res.locals.cartId, {$pull: {'treatsInCart': req.params.treatId})
+		await usersCart.save()
+
+		res.status(200).json({
+			data: usersCart,
+			success: true,
+			messsage: 'Here is the updated cart after removing the treat.'
+		})
 
 	}catch(error){
 		console.log(error);
