@@ -57,10 +57,27 @@ updateCart = async (req,res,error) => {
 		console.log(error);
 	}
 
+}
+
+getCart = async (req,res,error) => {
+	try {
+		const getUserCart = await Cart.findById(res.locals.cartId)
+
+		res.status(200).json({
+			data: getUserCart,
+			success: true,
+			messsage: 'Here is the users cart.'
+		})
+	}catch(error){
+		console.log(error);
 	}
+
+	}
+
 
 
 module.exports = {
 	createCart,
-	updateCart
+	updateCart,
+	getCart
 }
