@@ -64,7 +64,7 @@ updateCart = async (req,res,error) => {
 getCart = async (req,res,error) => {
 	try {
 		const getUserCart = await Cart.findById(res.locals.cartId)
-
+		console.log(getUserCart);
 		res.status(200).json({
 			data: getUserCart,
 			success: true,
@@ -101,13 +101,16 @@ deleteItemFromCart = async (req,res,error) => {
 
 deleteAllItemsFromCart = async (req,res,error) => {
 	try {
-		const usersCart = await Cart.findById(res.locals.cartId)
-		usersCart.clearcart = true 
-		usersCart.treatsInCart.remove()
-		await usersCart.save()
+		// I want to remove a single item from the cart,
+		// then that item should no longer have the card id on it
+
+		const deleteAllFromCart = await Cart.updateMany({$pull:{'treatsInCart': {'cartId': res.locals.cartId}}})
+		const updatedCart = await Cart.findById(res.locals.cartId)
+		updatedCart.clearCart = true
 
 		res.status(200).json({
-			data: usersCart,
+			data: updatedCart,
+			deletedItems: deleteAllFromCart,
 			success: true,
 			messsage: 'All items from the cart have been deleted.'
 		})
