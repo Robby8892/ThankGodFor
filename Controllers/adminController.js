@@ -62,12 +62,13 @@ loginAdmin = async (req,res, error) => {
 			
 			req.session.admin = true
 			req.session.loginName = findAdmin.loginName
-			req.session.adminId = findAdmin.adminId
+			req.session.adminId = findAdmin._id
 
+			req.session.save()
 			return res.status(201).json({
 				status: 201,
-				loginName: findAdmin.loginName,
-				id: findAdmin._id,
+				loginName: req.session.loginName,
+				id: req.session.adminId,
 				success: true
 			})
 

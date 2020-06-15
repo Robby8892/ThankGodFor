@@ -19,8 +19,11 @@ createCart = async(req, res, error) => {
 		// when a checkout is made to false, or clearcart is made
 		// to false then I want to delete the contents of the cart 
 		req.session.cartId = createdCart._id
+		req.session.cart = true 
+		req.session.save()
+		
 		res.status(200).json({
-			data:createdCart,
+			data:req.session.cartId,
 			success: true,
 			message: 'A new cart has been made.',
 		})
@@ -34,17 +37,19 @@ createCart = async(req, res, error) => {
 
 updateCart = async (req,res,error) => {
 	try {
-		const treatAddedToCart = {
-			treatsInCart: [req.params.id]
-		}
 
-		const updatedCart = await Cart.findByIdAndUpdate(req.session.cartId, treatAddedToCart)
+		console.log(req.session);
+		// const updatedCart = await Cart.findById(req.session.cartId)
+		// updatedCart.treatsInCart.push(req.params.treatId)
+		
+		// await updatedCart.save()
 
-		res.status(200).json({
-			data: updatedCart, 
-			success: true,
-			messsage: 'You haved added a new item to your cart.'
-		})	
+		// console.log(updatedCart);
+		// res.status(200).json({
+		// 	data: updatedCart, 
+		// 	success: true,
+		// 	messsage: 'You haved added a new item to your cart.'
+		// })	
 
 	}catch(error){
 		console.log(error);

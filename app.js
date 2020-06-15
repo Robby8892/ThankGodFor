@@ -16,7 +16,11 @@ app.use(bodyParser.json())
 app.use(session({
 	secret: process.env.SESSION_SECRET,
 	resave: false, 
-	saveUninitialized: true
+	saveUninitialized: true,
+	cookie: {
+		secure: true,
+		maxAge: 6 * 60 * 1000 * 300
+	}
 }))
 
 
@@ -37,11 +41,31 @@ app.get('/', (req,res)=>{
 
 // routes for API
 
-
-
 const cartRouter = require('./routes/cart-router.js')
 const treatRouter = require('./routes/treat-router.js')
 const adminRouter = require('./routes/admin-router.js')
+
+
+// here I will setup res.locals 
+
+app.use((req, res, next) => {
+	if(req.session.admin){
+		res.locals.adminId = req.session.adminId
+		res.locals.loginName = req.session.loginName
+	} 
+	if(req.session.cart){
+		res.locals.cartId = req.session.cartId
+	} else {
+		res.locals.adminId = false
+		res.locals.loginName = false
+		res.locals.cartId = false
+	}
+})
+
+
+
+
+
 // API Routes being used
 
 app.use('/api/v1', cartRouter)
