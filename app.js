@@ -7,13 +7,21 @@ const fetch = require('node-fetch')
 const bodyParser = require('body-parser')
 const fileStore = require('session-file-store')(session)
 const fileStoreOptions = {}
-
+const cors = require('cors')
 
 app.use(bodyParser.urlencoded({ 
 	extended: false 
 }))
 
 app.use(bodyParser.json())
+
+const corsOptions = {
+	origin: ['http://localhost:3000'],
+	credentials: true,
+	optionSuccessStatus: 200
+}
+
+app.use(cors(corsOptions))
 
 app.use(session({
 	secret: process.env.SESSION_SECRET,
