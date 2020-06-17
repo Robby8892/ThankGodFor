@@ -1,27 +1,44 @@
 const Treat = require('../models/treat.js')
 const fetch = require('node-fetch')
 const Cart = require('../models/cart.js')
+const FormData = require('form-data')
 
+const form = new FormData()
+console.log(form);
 
 
 createTreat = async (req,res, error) => {
-	try {
+	// try {
 		
 		// only an admin can create, update, or delete treats from the site
 		const newTreat = req.body
+		console.log(newTreat.price, 'data?');
+		console.log(req.file, 'here is the file');
 
-		const createdTreat = await Treat.create(newTreat)
+	// 	console.log('here is req.body', newTreat);
+	// 	const treatExists = await Treat.find({name: req.body.name})
+	// 	console.log('here is treatExists', treatExists);
+		
+	// 	if(treatExists.length > 0){
+	// 		return res.status(400).json({
+	// 			success: false,
+	// 			error: 'This treat already exists'
+	// 		})
+	// 	} else {
 
-		res.status(201).json({
-			data: createdTreat,
-			success: true,
-			message: 'You have successfully created a new treat.',
-			status: 201
-		})
+ // 		console.log(newTreat);
+	// 	const createdTreat = await Treat.create(newTreat)
 
-	}catch(error){
-		console.log(error);
-	}
+	// 	res.status(200).json({
+	// 		data: createdTreat,
+	// 		success: true,
+	// 		message: 'You have successfully created a new treat.',
+	// 		status: 200
+	// 	})
+	// }
+	// }catch(error){
+	// 	console.log(error);
+	// }
 }
 
 deleteTreat = async (req,res,error) => {

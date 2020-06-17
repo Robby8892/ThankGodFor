@@ -13,7 +13,7 @@ router.get('/treat/:id', treatController.getOneTreat)
 router.get('/treat', treatController.getAllTreats)
 
 
-router.post('/treat/new', verifyIfAdmin, upload.single('imgOfTreat'), treatController.createTreat)
+router.post('/treat/new', upload.single('imgOfTreat'), treatController.createTreat)
 router.delete('/treat/:id', verifyIfAdmin, treatController.deleteTreat)
 router.put('/treat/:id/edit', verifyIfAdmin, treatController.updateTreat)
 

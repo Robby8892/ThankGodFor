@@ -40,7 +40,8 @@ createAdmin = async (req,res,error) => {
 
 loginAdmin = async (req,res, error) => {
 	try {
-		const body = req.body
+	
+		const body = req.body.data
 
 		const findAdmin = await Admin.findOne({loginName: body.loginName})
 
@@ -63,7 +64,7 @@ loginAdmin = async (req,res, error) => {
 			req.session.adminId = findAdmin._id
 
 			return res.status(200).json({
-				status: 201,
+				status: 200,
 				loginName: req.session.loginName,
 				id: req.session.adminId,
 				success: true
