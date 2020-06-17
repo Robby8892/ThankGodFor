@@ -3,11 +3,10 @@ const fetch = require('node-fetch')
 const Cart = require('../models/cart.js')
 
 
+// only an admin can create, update, or delete treats from the site
 
 createTreat = async (req,res, error) => {
 	try {
-		
-		// only an admin can create, update, or delete treats from the site
 
 		const newTreat = {
 			name: req.body.name,
@@ -15,7 +14,8 @@ createTreat = async (req,res, error) => {
 			description: req.body.description,
 			imgOfTreat: {
 				data: req.file.buffer,
-				contentType: req.file.mimetype
+				contentType: req.file.mimetype,
+				fileUrl: req.file.originalname	
 			}
 		}
 		console.log('here is my new treat', newTreat);
@@ -43,6 +43,18 @@ createTreat = async (req,res, error) => {
 		console.log(error);
 	}
 }
+
+getImgOfAllTreats = async (req,res,error) => {
+	try {
+		const getPhotoOfTreat = await Treat.find()
+
+
+
+	}catch(error){
+		console.log(error);
+	}
+
+	}
 
 deleteTreat = async (req,res,error) => {
 	try {
@@ -117,6 +129,7 @@ getOneTreat = async (req,res,error) => {
 
 getAllTreats = async (req,res,error) => {
 	try {
+
 		const foundTreat = await Treat.find()
 
 		res.status(200).json({
@@ -130,6 +143,7 @@ getAllTreats = async (req,res,error) => {
 	}
 
 }
+
 
 
 module.exports = {

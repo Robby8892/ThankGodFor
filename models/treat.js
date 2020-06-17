@@ -21,7 +21,7 @@ const treatSchema = mongoose.Schema({
 	description : {
 		type: String,
 		required: true
-	}
+	},
 	// when in cart is true the treat will be added to the 
 	// carts contents 
 	inCart: {
