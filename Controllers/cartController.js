@@ -37,20 +37,19 @@ createCart = async(req, res, error) => {
 
 updateCart = async (req,res,error) => {
 	try {
-		console.log('are you even here?', req.params);
 		
 		const updatedCart = await Cart.findById(req.params.cartId)
 		const foundTreat = await Treat.findById(req.params.treatId)
 		foundTreat.cartId = req.params.cartId
 		foundTreat.inCart = true 
-		updatedCart.treatsInCart.push(foundTreat)
+		// updatedCart.treatsInCart.push(foundTreat)
 		
 
-		await updatedCart.save()
+		// await updatedCart.save()
 
 
 		res.status(200).json({
-			data: updatedCart, 
+			data: foundTreat, 
 			success: true,
 			messsage: 'You haved added a new item to your cart.'
 		})	
