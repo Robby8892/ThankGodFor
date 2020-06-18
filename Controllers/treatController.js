@@ -90,10 +90,10 @@ updateTreat = async (req,res,error) => {
 			return res.status(400).json({
 				data: {},
 				success: false,
-				error: 'No id matches the one provided.'
+				error: 'No treat id matches the one provided.'
 			})
 		} else {
-			res.status(201).json({
+			res.status(200).json({
 				data: treatToUpdate,
 				success: true,
 				message: 'You have successfully updated the treat.'
@@ -105,6 +105,30 @@ updateTreat = async (req,res,error) => {
 	}
 
 	}
+
+updateQuantity = async (req,res,error) => {
+	try {
+		const updateQuantityOfTreat = await Treat.findByIdAndUpdate(req.params.id, req.body)
+
+		if(!updateQuantityOfTreat){
+			return res.status(400).json({
+			data: {},
+			success: false,
+			error: 'No treat id matches the one provided.'
+		}) 
+		} else {
+				res.status(200).json({
+					data: updateQuantityOfTreat.quantity,
+					success: true,
+					message: `You have update the treat quantity in your cart to ${updateQuantityOfTreat.quantity}`
+				})
+			}
+	}catch(error){
+		console.log(error);
+	}
+
+	}
+
 
 getOneTreat = async (req,res,error) => {
 	try {

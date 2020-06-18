@@ -28,6 +28,10 @@ const treatSchema = mongoose.Schema({
 		type: Boolean,
 		default: false
 	},
+	quantity: {
+		type: Number,
+		default: 0
+	},
 	// every item will have a cart id defaulted as null 
 	// amd this will change when it is in the cart
 	// this will make it easier to delete the item 
