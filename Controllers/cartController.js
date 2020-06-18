@@ -23,7 +23,7 @@ createCart = async(req, res, error) => {
 		req.session.save()
 		
 		res.status(200).json({
-			data:req.session.cartId,
+			data:createdCart,
 			success: true,
 			message: 'A new cart has been made.',
 		})
@@ -37,14 +37,14 @@ createCart = async(req, res, error) => {
 
 updateCart = async (req,res,error) => {
 	try {
-
+		console.log('are you even here?', req.params);
 		
-		const updatedCart = await Cart.findById(res.locals.cartId)
+		const updatedCart = await Cart.findById(req.params.cartId)
 		const foundTreat = await Treat.findById(req.params.treatId)
-		foundTreat.cartId = res.locals.cartId
+		foundTreat.cartId = req.params.cartId
 		foundTreat.inCart = true 
 		updatedCart.treatsInCart.push(foundTreat)
-
+		
 
 		await updatedCart.save()
 
@@ -61,8 +61,10 @@ updateCart = async (req,res,error) => {
 
 }
 
+// if there is a login for a user then this will be more valuable
 getCart = async (req,res,error) => {
 	try {
+		console.log('res.locals.cartId', res.locals.cartId);
 		const getUserCart = await Cart.findById(res.locals.cartId)
 		console.log(getUserCart);
 		res.status(200).json({
@@ -83,7 +85,7 @@ getCart = async (req,res,error) => {
 
 deleteItemFromCart = async (req,res,error) => {
 	try {
-		const usersCart = await Cart.findById(res.locals.cartId)
+		const usersCart = await Cart.findById(res.params.cartId)
 		usersCart.treatsInCart.id(req.params.treatId).remove()
 
 		await usersCart.save()

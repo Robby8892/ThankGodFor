@@ -19,7 +19,6 @@ createTreat = async (req,res, error) => {
 				fileUrl: req.file.originalname	
 			}
 		}
-		console.log('here is my new treat', newTreat);
 	
 		const treatExists = await Treat.find({name: newTreat.name})
 	
@@ -30,7 +29,7 @@ createTreat = async (req,res, error) => {
 			})
 		} else {
 
- 		console.log(newTreat);
+ 		console.log(newTreat, 'the new treat');
 		const createdTreat = await Treat.create(newTreat)
 
 		res.status(200).json({

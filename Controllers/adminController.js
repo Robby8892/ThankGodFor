@@ -41,7 +41,7 @@ createAdmin = async (req,res,error) => {
 loginAdmin = async (req,res, error) => {
 	try {
 	
-		const body = req.body.data
+		const body = req.body.data || req.body
 
 		const findAdmin = await Admin.findOne({loginName: body.loginName})
 
