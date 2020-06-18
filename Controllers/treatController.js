@@ -44,10 +44,12 @@ createTreat = async (req,res, error) => {
 	}
 }
 
-getImgOfAllTreats = async (req,res,error) => {
+getImgById = async (req,res,error) => {
 	try {
-		const getPhotoOfTreat = await Treat.find()
+		const getImg = await Treat.findById(req.params.id)
 
+			res.set('Content-Type', getImg.imgOfTreat.contentType)
+			res.send(getImg.imgOfTreat.data)
 
 
 	}catch(error){
@@ -151,5 +153,6 @@ module.exports = {
 	deleteTreat,
 	updateTreat,
 	getOneTreat,
-	getAllTreats
+	getAllTreats,
+	getImgById
 }
