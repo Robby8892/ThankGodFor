@@ -62,6 +62,7 @@ const adminRouter = require('./routes/admin-router.js')
 
 app.use((req, res, next) => {
 	if(req.session.admin){
+		console.log('i should see locals', res.locals);
 		res.locals.adminId = req.session.adminId
 		res.locals.loginName = req.session.loginName
 		

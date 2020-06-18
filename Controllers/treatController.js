@@ -6,6 +6,7 @@ const Cart = require('../models/cart.js')
 // only an admin can create, update, or delete treats from the site
 
 createTreat = async (req,res, error) => {
+
 	try {
 
 		const newTreat = {

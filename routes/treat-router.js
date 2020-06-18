@@ -4,16 +4,16 @@ const multer = require('multer')
 const path = require('path')
 
 
-const storage = multer.diskStorage({
-	destination: '../public/uploads',
-	filename: function(req, file, cb){
-		cb(null, "Image-" + Date.now() + 
-			path.extname(file.originalname))
-	}
-})
+// const storage = multer.diskStorage({
+// 	destination: '../public/uploads',
+// 	filename: function(req, file, cb){
+// 		cb(null, "Image-" + Date.now() + 
+// 			path.extname(file.originalname))
+// 	}
+// })
 const upload = multer({ 
-	storage: storage,
-	limits:{fileSize: 1000000},
+	storage: multer.memoryStorage(),
+	limits:{fileSize: 1000000000000000000000},
 })
 
 // this will be added to each routet that only the admin can change 
@@ -25,7 +25,7 @@ router.get('/treat/:id', treatController.getOneTreat)
 router.get('/treat', treatController.getAllTreats)
 router.get('/image/treat/:id', treatController.getImgById)
 
-router.post('/treat/new', verifyIfAdmin, upload.single('imgOfTreat'), treatController.createTreat)
+router.post('/treat/new', upload.single('imgOfTreat'), treatController.createTreat)
 router.delete('/treat/:id', verifyIfAdmin, treatController.deleteTreat)
 router.put('/treat/:id/edit', verifyIfAdmin, treatController.updateTreat)
 
