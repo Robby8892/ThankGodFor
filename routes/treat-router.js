@@ -28,5 +28,6 @@ router.get('/image/treat/:id', treatController.getImgById)
 router.post('/treat/new', upload.single('imgOfTreat'), treatController.createTreat)
 router.delete('/treat/:id', verifyIfAdmin, treatController.deleteTreat)
 router.put('/treat/:id/edit', verifyIfAdmin, treatController.updateTreat)
+router.put('/treat/quantity/:id', treatController.updateQuantity)
 
 module.exports = router

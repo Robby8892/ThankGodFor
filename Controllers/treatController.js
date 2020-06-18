@@ -178,5 +178,6 @@ module.exports = {
 	updateTreat,
 	getOneTreat,
 	getAllTreats,
-	getImgById
+	getImgById,
+	updateQuantity
 }
