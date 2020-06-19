@@ -44,10 +44,7 @@ updateCart = async (req,res,error) => {
 		// if the treat already has a cartId for the user then we should only
 		// update the quantity
 		if(foundTreat.cartId == req.params.cartId){
-			// console.log(foundTreat, 'for status 205')
-			console.log(req.body.data, 'here is req.body.data');
-			foundTreat.quantity += Number(req.body.data)
-			console.log(foundTreat.quantity);
+			foundTreat.quantity = Number(req.body.data)
 			foundTreat.save()
 
 			return res.status(201).json({
@@ -60,10 +57,10 @@ updateCart = async (req,res,error) => {
 			foundTreat.cartId = req.params.cartId
 			foundTreat.inCart = true 
 			foundTreat.quantity = req.body.data
-			console.log(foundTreat, 'for status 200')
+			updatedCart.treatsInCart.push(foundTreat)
+			updatedCart.save()
 			foundTreat.save()
 
-			// await updatedCart.save()
 
 
 			res.status(200).json({
@@ -84,9 +81,7 @@ updateCart = async (req,res,error) => {
 // if there is a login for a user then this will be more valuable
 getCart = async (req,res,error) => {
 	try {
-		console.log('res.locals.cartId', res.locals.cartId);
 		const getUserCart = await Cart.findById(res.locals.cartId)
-		console.log(getUserCart);
 		res.status(200).json({
 			data: getUserCart,
 			success: true,
@@ -105,8 +100,10 @@ getCart = async (req,res,error) => {
 
 deleteItemFromCart = async (req,res,error) => {
 	try {
-		const usersCart = await Cart.findById(res.params.cartId)
-		usersCart.treatsInCart.id(req.params.treatId).remove()
+		console.log(req.params, 'here is req');
+		const usersCart = await Cart.findById(req.params.cartId)
+		// usersCart.treatsInCart.id(req.params.treatId).remove()
+		console.log(usersCart);
 
 		await usersCart.save()
 		res.status(200).json({
@@ -125,8 +122,7 @@ deleteAllItemsFromCart = async (req,res,error) => {
 	try {
 		// I want to remove a single item from the cart,
 		// then that item should no longer have the card id on it
-
-		const deleteAllFromCart = await Cart.updateMany({$pull:{'treatsInCart': {'cartId': res.locals.cartId}}})
+		const deleteAllFromCart = await Cart.updateMany({$pull:{'treatsInCart': {'cartId': req.params.cartId}}})
 		const updatedCart = await Cart.findById(res.locals.cartId)
 		updatedCart.clearCart = true
 
