@@ -44,6 +44,8 @@ updateCart = async (req,res,error) => {
 		// if the treat already has a cartId for the user then we should only
 		// update the quantity
 		if(foundTreat.cartId == req.params.cartId){
+			console.log('are you here?', req.params);
+			console.log(foundTreat);
 			foundTreat.quantity = Number(req.body.data)
 			foundTreat.save()
 
@@ -54,6 +56,7 @@ updateCart = async (req,res,error) => {
 				messsage: 'You have updated the quantity.'
 			})
 		} else {
+			console.log('are you here?');
 			foundTreat.cartId = req.params.cartId
 			foundTreat.inCart = true 
 			foundTreat.quantity = req.body.data
@@ -103,9 +106,10 @@ deleteItemFromCart = async (req,res,error) => {
 
 		const usersCart = await Cart.findById(req.params.cartId)
 		usersCart.treatsInCart.id(req.params.treatId).remove()
-		console.log(usersCart);
-
-		// await usersCart.save()
+		const findTreatById = await Treat.findById(req.params.treatId)
+		findTreatById.cartId = null
+		await findTreatById.save()
+		await usersCart.save()
 		res.status(200).json({
 			data: usersCart,
 			success: true,
