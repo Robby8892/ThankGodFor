@@ -103,11 +103,12 @@ getCart = async (req,res,error) => {
 
 deleteItemFromCart = async (req,res,error) => {
 	try {
-
+		console.log(res);
 		const usersCart = await Cart.findById(req.params.cartId)
 		usersCart.treatsInCart.id(req.params.treatId).remove()
 		const findTreatById = await Treat.findById(req.params.treatId)
 		findTreatById.cartId = null
+
 		await findTreatById.save()
 		await usersCart.save()
 		res.status(200).json({
@@ -126,10 +127,13 @@ deleteAllItemsFromCart = async (req,res,error) => {
 	try {
 		// I want to remove a single item from the cart,
 		// then that item should no longer have the card id on it
+		console.log(res);
+		console.log('made it here', req.params.cartId);
 		const deleteAllFromCart = await Cart.updateMany({$pull:{'treatsInCart': {'cartId': req.params.cartId}}})
-		const updatedCart = await Cart.findById(res.locals.cartId)
+		const updatedCart = await Cart.findById(req.params.cartId)
 		updatedCart.clearCart = true
-
+		console.log('here is deleteAllFromCart', deleteAllFromCart);
+		console.log('here is updatedCart', updatedCart);
 		res.status(200).json({
 			data: updatedCart,
 			deletedItems: deleteAllFromCart,
