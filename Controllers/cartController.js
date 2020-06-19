@@ -100,12 +100,12 @@ getCart = async (req,res,error) => {
 
 deleteItemFromCart = async (req,res,error) => {
 	try {
-		console.log(req.params, 'here is req');
+
 		const usersCart = await Cart.findById(req.params.cartId)
-		// usersCart.treatsInCart.id(req.params.treatId).remove()
+		usersCart.treatsInCart.id(req.params.treatId).remove()
 		console.log(usersCart);
 
-		await usersCart.save()
+		// await usersCart.save()
 		res.status(200).json({
 			data: usersCart,
 			success: true,
