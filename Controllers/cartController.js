@@ -38,21 +38,40 @@ createCart = async(req, res, error) => {
 updateCart = async (req,res,error) => {
 	try {
 		
+
 		const updatedCart = await Cart.findById(req.params.cartId)
 		const foundTreat = await Treat.findById(req.params.treatId)
-		foundTreat.cartId = req.params.cartId
-		foundTreat.inCart = true 
-		// updatedCart.treatsInCart.push(foundTreat)
-		
+		// if the treat already has a cartId for the user then we should only
+		// update the quantity
+		if(foundTreat.cartId == req.params.cartId){
+			console.log(foundTreat, 'for status 205')
+			foundTreat.quantity += 1
+			foundTreat.save()
 
-		// await updatedCart.save()
+			return res.status(201).json({
+				data: foundTreat,
+				success: true,
+				status: 201,
+				messsage: 'You have updated the quantity.'
+			})
+		} else {
+			foundTreat.cartId = req.params.cartId
+			foundTreat.inCart = true 
+			foundTreat.quantity = req.body.data
+			console.log(foundTreat, 'for status 200')
+			foundTreat.save()
+
+			// await updatedCart.save()
 
 
-		res.status(200).json({
-			data: foundTreat, 
-			success: true,
-			messsage: 'You haved added a new item to your cart.'
-		})	
+			res.status(200).json({
+				data: foundTreat, 
+				success: true,
+				status: 200,
+				messsage: 'You haved added a new item to your cart.'
+			})	
+
+		}
 
 	}catch(error){
 		console.log(error);
