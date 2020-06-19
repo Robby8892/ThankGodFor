@@ -44,8 +44,10 @@ updateCart = async (req,res,error) => {
 		// if the treat already has a cartId for the user then we should only
 		// update the quantity
 		if(foundTreat.cartId == req.params.cartId){
-			console.log(foundTreat, 'for status 205')
-			foundTreat.quantity += 1
+			// console.log(foundTreat, 'for status 205')
+			console.log(req.body.data, 'here is req.body.data');
+			foundTreat.quantity += Number(req.body.data)
+			console.log(foundTreat.quantity);
 			foundTreat.save()
 
 			return res.status(201).json({
