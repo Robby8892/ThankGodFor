@@ -4,6 +4,8 @@
   "description": "# Link to wireframe  https://www.figma.com/file/1Rogu6PpnPiEBeWI4pd71P/Thank-God-4-Raw-%26-Vegan-Treats?node-id=0%3A1",
   "main": "app.js",
   "scripts": {
+    "heroku-prebuild": "export NPM_CONFIG_PRODUCTION=false; export NODE_ENV=; NPM_CONFIG_PRODUCTION=false NODE_ENV=development npm install --only=dev --dev",
+    "heroku-postbuild": "export NPM_CONFIG_PRODUCTION=true; export NODE_ENV=production;",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
