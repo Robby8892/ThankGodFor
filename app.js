@@ -47,10 +47,10 @@ app.use(session({
 // test route 
 
 
-// app.get('/test', (req,res)=>{
+app.get('/test', (req,res)=>{
 
-// 	res.send('Test route works')
-// })
+	res.send('Test route works')
+})
 
 // routes for API
 
@@ -77,12 +77,13 @@ app.use((req, res, next) => {
 })
 
 
+console.log('here you are in heroku');
 
 // API Routes being used
 
-app.use('/api/v1', cartRouter)
-app.use('/api/v1', treatRouter)
-app.use('/api/v1', adminRouter)
+// app.use('/api/v1', cartRouter)
+// app.use('/api/v1', treatRouter)
+// app.use('/api/v1', adminRouter)
 
 
 app.listen(process.env.PORT
