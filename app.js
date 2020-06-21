@@ -47,7 +47,7 @@ app.use(session({
 // test route 
 
 
-app.get('/', (req,res)=>{
+app.get('/test', (req,res)=>{
 
 	res.send('Test route works')
 })
