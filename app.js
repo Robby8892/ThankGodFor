@@ -47,10 +47,10 @@ app.use(session({
 // test route 
 
 
-app.get('/test', (req,res)=>{
+// app.get('/test', (req,res)=>{
 
-	res.send('Test route works')
-})
+// 	res.send('Test route works')
+// })
 
 // routes for API
 
