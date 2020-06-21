@@ -47,16 +47,16 @@ app.use(session({
 // test route 
 
 
-app.get('/test', (req,res)=>{
+// app.get('/test', (req,res)=>{
 
-	res.send('Test route works')
-})
+// 	res.send('Test route works')
+// })
 
 // routes for API
 
-const cartRouter = require('./routes/cart-router.js')
-const treatRouter = require('./routes/treat-router.js')
-const adminRouter = require('./routes/admin-router.js')
+// const cartRouter = require('./routes/cart-router.js')
+// const treatRouter = require('./routes/treat-router.js')
+// const adminRouter = require('./routes/admin-router.js')
 
 // here I will setup res.locals 
 
