@@ -6,7 +6,7 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/vegan-app
 	useFindAndModify: false
 })
 
-console.log(process.env.MONGODB_URI, 'here is my db');
+console.log(process.env.MONGODB_URI || 'mongodb://localhost:27017/vegan-app', 'here is my db');
 
 mongoose.connection.on('connected', () => {
 	console.log('You\'re connected to the db');
