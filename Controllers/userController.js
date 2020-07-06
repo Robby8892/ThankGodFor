@@ -88,5 +88,6 @@ loginUser= async (req,res, error) => {
 
 
 module.exports = {
-	createUser
+	createUser,
+	loginUser
 }
