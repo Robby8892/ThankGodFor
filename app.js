@@ -57,6 +57,7 @@ app.get('/test', (req,res)=>{
 const cartRouter = require('./routes/cart-router.js')
 const treatRouter = require('./routes/treat-router.js')
 const adminRouter = require('./routes/admin-router.js')
+const userRouter = require('./routes/user-router.js')
 
 // here I will setup res.locals 
 
@@ -84,6 +85,7 @@ console.log('here you are in heroku');
 app.use('/api/v1', cartRouter)
 app.use('/api/v1', treatRouter)
 app.use('/api/v1', adminRouter)
+app.use('/api/v1', userRouter)
 
 
 app.listen(process.env.PORT || 3333,

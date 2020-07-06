@@ -13,6 +13,6 @@ const userSchema = mongoose.Schema({
 	},
 	cartId: {
 		type: mongoose.Schema.Types.ObjectId,
-		ref: usersCart
+		ref: 'usersCart'
 	}
 })
