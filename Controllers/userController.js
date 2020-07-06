@@ -61,11 +61,14 @@ loginUser= async (req,res, error) => {
 		if(passwordValidation){
 			console.log('passward is valid!');
 
+			req.session.user = true
+			req.session.email = findUser.email
+			req.session.userId = findUser._id
 
 			return res.status(200).json({
 				status: 200,
-				email: req.body.email,
-				id: findUser._id,
+				email: req.session.email,
+				id: req.session.userId,
 				success: true
 			})
 
@@ -84,6 +87,34 @@ loginUser= async (req,res, error) => {
 	}
 
 }
+
+
+logoutUser = async (req,res,error) => {
+	try {
+		if(!req.session.loginName){
+			return res.status(400).json({
+				status: 400,
+				success: false,
+				error: 'You need to be logged in to logout.'
+			})
+		} else {
+
+			await req.session.destroy()
+
+			return res.status(200).json({
+				data: {},
+				success: true,
+				status: 200,
+				message: 'You are succesfully logged out'
+			})
+		}
+
+
+	}catch(error){
+		console.log('error');
+	}
+
+	}
 
 
 

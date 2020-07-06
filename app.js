@@ -63,7 +63,7 @@ const userRouter = require('./routes/user-router.js')
 
 app.use((req, res, next) => {
 	if(req.session.admin){
-		console.log('i should see locals', res.locals);
+		console.log('i should see locals of admin', res.locals);
 		res.locals.adminId = req.session.adminId
 		res.locals.loginName = req.session.loginName
 		
@@ -73,6 +73,20 @@ app.use((req, res, next) => {
 		res.locals.adminId = false
 		res.locals.loginName = false
 		res.locals.cartId = false
+	}
+	next()
+})
+
+app.use((req, res, next) => {
+	if(req.session.user){
+		console.log('i should see locals of user', res.locals);
+		res.locals.userId = req.session.userId
+		res.locals.email = req.session.email
+		
+	} else {
+		res.locals.userId = false
+		res.locals.email = false
+
 	}
 	next()
 })
