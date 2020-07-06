@@ -91,7 +91,7 @@ loginUser= async (req,res, error) => {
 
 logoutUser = async (req,res,error) => {
 	try {
-		if(!req.session.loginName){
+		if(!req.session.email){
 			return res.status(400).json({
 				status: 400,
 				success: false,
@@ -121,5 +121,6 @@ logoutUser = async (req,res,error) => {
 
 module.exports = {
 	createUser,
-	loginUser
+	loginUser,
+	logoutUser
 }
