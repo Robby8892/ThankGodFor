@@ -16,3 +16,8 @@ const userSchema = mongoose.Schema({
 		ref: 'usersCart'
 	}
 })
+
+
+const User = mongoose.model('User', userSchema)
+
+module.exports = User

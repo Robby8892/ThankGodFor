@@ -1,5 +1,9 @@
 const session = require('express-session')
-const User = require('../models/user.js')
+const bcrypt = require('bcrypt')
+const shortId = require('shortid')
+
+
+console.log('here is user_________', User);
 
 createUser = async (req,res,error) => {
 	try {
@@ -21,7 +25,7 @@ createUser = async (req,res,error) => {
 				status: 201,
 				success: true,
 				id: newUser._id,
-				message: 'Admin created!'
+				message: 'User created!'
 			})
 		})
 

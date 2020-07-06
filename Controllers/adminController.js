@@ -84,7 +84,7 @@ loginAdmin = async (req,res, error) => {
 		console.log(error);
 	}
 
-	}
+}
 
 
 logoutAdmin = async (req,res,error) => {
