@@ -29,4 +29,11 @@ createUser = async (req,res,error) => {
 		console.log(error);
 	}
 
-	}
+}
+
+
+
+
+module.exports = {
+	createUser
+}
