@@ -4,7 +4,7 @@ const shortId = require('shortid')
 const User = require('../models/user.js')
 
 
-console.log('here is user_________', User);
+
 
 createUser = async (req,res,error) => {
 	try {
@@ -42,8 +42,9 @@ loginUser= async (req,res, error) => {
 	try {
 	
 		const body = req.body.data || req.body
-
-		const findUser = await User.findOne({username: body.username})
+		console.log('here is req.body', req.body);
+		const findUser = await User.findOne({email: body.email})
+		console.log(findUser, 'here is the foundUser');
 
 		if(!findUser){
 			console.log('Can\'t find user.');
