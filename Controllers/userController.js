@@ -2,33 +2,58 @@ const session = require('express-session')
 const bcrypt = require('bcrypt')
 const shortId = require('shortid')
 const User = require('../models/user.js')
+const Cart = require('../models/cart.js')
 
-
-
+//when a new user is registered on the site, a new cart will be created 
+// as well 
 
 createUser = async (req,res,error) => {
 	try {
 
-		const salt = bcrypt.genSaltSync(10)
-		const hashedPassword = bcrypt.hashSync(req.body.password, salt)
-		const hashedToken = bcrypt.hashSync(shortId.generate(), salt)
+		const userExists = await User.findOne({email: req.body.email})
 
-		const newUserObj = {
-			email: req.body.email,
-			password: hashedPassword,
-			token: hashedToken
-		}
-
-		const newUser = new User(newUserObj)
-		
-		newUser.save().then(() => {
-			return res.status(201).json({
-				status: 201,
-				success: true,
-				id: newUser._id,
-				message: 'User created!'
+		if(userExists){
+			return res.json({
+				status: 400,
+				success: false,
+				error: 'User alraedy exists'
 			})
-		})
+		} else {
+			const salt = bcrypt.genSaltSync(10)
+			const hashedPassword = bcrypt.hashSync(req.body.password, salt)
+			const hashedToken = bcrypt.hashSync(shortId.generate(), salt)
+
+			const newCart = {
+				checkout: false,
+				clearCart: false
+			}
+
+			const createdCart = await Cart.create(newCart)
+			req.session.cartId = createdCart._id
+			req.session.cart = true 
+
+			const newUserObj = {
+				email: req.body.email,
+				password: hashedPassword,
+				token: hashedToken,
+				cartId: createdCart._id
+			}
+
+			const newUser = new User(newUserObj)
+
+			console.log(createdCart, 'here is createdCart');
+			console.log(newUser, 'here is newUser');
+			
+
+			await newUser.save().then(() => {
+				return res.status(201).json({
+					status: 201,
+					success: true,
+					id: newUser._id,
+					message: 'User created!'
+				})
+			})
+		}
 
 	}catch(error){
 		console.log(error);
