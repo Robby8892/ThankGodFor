@@ -3,11 +3,12 @@ const cartController = require('../Controllers/cartController.js')
 
 const router = express.Router()
 
+const verifyUser = require('../lib/verifyUserLoggedIn.js')
+console.log(verifyUser);
 
-router.post('/cart/new', cartController.createCart)
-router.put('/cart/:cartId/:treatId/edit', cartController.updateCart)
+router.put('/cart/:cartId/:treatId/edit', verifyUser, cartController.updateCart)
 router.get('/cart', cartController.getCart)
-router.delete('/cart/:treatId/:cartId', cartController.deleteItemFromCart)
-router.delete('/cart/:cartId', cartController.deleteAllItemsFromCart)
+router.delete('/cart/:treatId/:cartId', verifyUser, cartController.deleteItemFromCart)
+router.delete('/cart/:cartId', verifyUser, cartController.deleteAllItemsFromCart)
 
 module.exports = router

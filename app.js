@@ -79,9 +79,10 @@ app.use((req, res, next) => {
 
 app.use((req, res, next) => {
 	if(req.session.user){
-		console.log('i should see locals of user', res.locals);
 		res.locals.userId = req.session.userId
 		res.locals.email = req.session.email
+		res.locals.user = true 
+		console.log('i should see locals of user', res.locals);
 		
 	} else {
 		res.locals.userId = false
